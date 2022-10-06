@@ -1,0 +1,25 @@
+@import "./font";
+@import "./variables";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "./bootswatch";
+@import "./layout";
+
+body {
+    font-family: "Inter", "Avenir", "Helvetica Neue", "Segoe UI", "Tahoma",
+        "Verdana", sans-serif;
+}
+
+.form-control,
+.form-control:focus,
+.form-select,
+.form-select:focus {
+    background-color: white;
+}
+
+h1 {
+    letter-spacing: -1.6px;
+}
+
+.no-mb-last:last-of-type {
+    margin-bottom: 0 !important;
+}
