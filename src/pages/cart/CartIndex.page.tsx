@@ -1,14 +1,22 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { PageTitle } from "../../components/Layout/PageTitle";
 import { useStoreActions, useStoreState } from "../../store/_store";
 import { Row, Col, Table, Button } from "reactstrap";
 import { CartProductTableRow } from "../../components/Cart/CartProductTableRow";
 import { currencyFormat } from "../../util/currencyFormat";
+import { CartProduct } from "../../types/CartProduct";
+import { EditCartItemModal } from "../../components/Cart/EditCartItemModal";
 
 export const CartIndexPage: FunctionComponent = () => {
     const cart = useStoreState(state => state.cart);
     const totalCartPrice = useStoreState(state => state.totalCartPrice);
     const setCart = useStoreActions(actions => actions.setCart);
+
+    const [cartProductToEdit, setCartProductToUpdate] = useState<
+        CartProduct | undefined
+    >(undefined);
+    const [showEditCartProductModal, setShowEditCartProductModal] =
+        useState(false);
 
     return (
         <div>
@@ -18,6 +26,7 @@ export const CartIndexPage: FunctionComponent = () => {
                 </Button>
             </PageTitle>
             {cartList()}
+            {editCartProductModal()}
         </div>
     );
 
@@ -39,6 +48,12 @@ export const CartIndexPage: FunctionComponent = () => {
                                 <CartProductTableRow
                                     cartProduct={cartProduct}
                                     key={index}
+                                    setCartProductToUpdate={
+                                        setCartProductToUpdate
+                                    }
+                                    setShowEditCartProductModal={
+                                        setShowEditCartProductModal
+                                    }
                                 />
                             ))}
                             <tr>
@@ -54,5 +69,17 @@ export const CartIndexPage: FunctionComponent = () => {
 
     function clearCart() {
         setCart([]);
+    }
+
+    function editCartProductModal() {
+        if (cartProductToEdit) {
+            return (
+                <EditCartItemModal
+                    cartProduct={cartProductToEdit}
+                    setShowEditCartProductModal={setShowEditCartProductModal}
+                    showEditCartProductModal={showEditCartProductModal}
+                />
+            );
+        }
     }
 };
