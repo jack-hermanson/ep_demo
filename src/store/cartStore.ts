@@ -8,6 +8,7 @@ export interface CartStoreModel {
     setCart: Action<StoreModel, CartProduct[]>;
     addProductToCart: Action<StoreModel, Product>;
     totalCartPrice: Computed<StoreModel, number>;
+    removeItemFromCart: Action<StoreModel, number>;
 }
 
 export const cartStore: CartStoreModel = {
@@ -47,5 +48,10 @@ export const cartStore: CartStoreModel = {
                   .map(cp => cp.product.price * cp.count)
                   .reduce((accumulator = 0, price) => accumulator + price)
             : 0;
+    }),
+    removeItemFromCart: action((state, productToRemoveId) => {
+        state.cart = state.cart.filter(
+            cp => cp.product.id !== productToRemoveId
+        );
     }),
 };
