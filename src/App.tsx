@@ -1,5 +1,5 @@
-import { ProductsIndexPage } from "./pages/products/productsIndex.page";
-import { ProductDetailsPage } from "./pages/products/productDetails.page";
+import { ProductsIndexPage } from "./pages/products/ProductsIndex.page";
+import { ProductDetailsPage } from "./pages/products/ProductDetails.page";
 import { IndexPage } from "./pages/index/MainIndex.page";
 import { CartIndexPage } from "./pages/cart/CartIndex.page";
 import { useStoreActions } from "./store/_store";
